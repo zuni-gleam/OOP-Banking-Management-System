@@ -3,53 +3,51 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1309</width>
-    <height>745</height>
-   </rect>
+   <rect><x>0</x><y>0</y><width>500</width><height>400</height></rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>banking system</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QLabel" name="titlelabel">
     <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>0</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
+     <rect><x>50</x><y>70</y><width>400</width><height>60</height></rect>
     </property>
-    <property name="plainText">
-     <string>Banking System
-</string>
+    <property name="text"><string>banking system</string></property>
+    <property name="alignment"><set>Qt::AlignCenter</set></property>
+    <property name="styleSheet">
+     <string>font-size: 32px; font-weight: bold; color: #2c3e50;</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1309</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuBanking_System">
-    <property name="title">
-     <string>Banking System</string>
+   <widget class="QLabel" name="subtitlelabel">
+    <property name="geometry">
+     <rect><x>50</x><y>140</y><width>400</width><height>30</height></rect>
+    </property>
+    <property name="text"><string>secure. simple. reliable.</string></property>
+    <property name="alignment"><set>Qt::AlignCenter</set></property>
+    <property name="styleSheet">
+     <string>font-size: 14px; color: #7f8c8d;</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuBanking_System_2">
-    <property name="title">
-     <string>Banking System</string>
+   <widget class="QPushButton" name="startbutton">
+    <property name="geometry">
+     <rect><x>150</x><y>230</y><width>200</width><height>50</height></rect>
+    </property>
+    <property name="text"><string>get started</string></property>
+    <property name="styleSheet">
+     <string>background-color: #2980b9; color: white; font-size: 16px; font-weight: bold; border-radius: 8px;</string>
     </property>
    </widget>
-   <addaction name="menuBanking_System"/>
-   <addaction name="menuBanking_System_2"/>
+   <widget class="QLabel" name="footerlabel">
+    <property name="geometry">
+     <rect><x>50</x><y>330</y><width>400</width><height>25</height></rect>
+    </property>
+    <property name="text"><string>oop course project</string></property>
+    <property name="alignment"><set>Qt::AlignCenter</set></property>
+    <property name="styleSheet">
+     <string>font-size: 11px; color: #bdc3c7;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
