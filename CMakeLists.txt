@@ -16,6 +16,7 @@ qt_add_executable(BankingSystem1
     account.h account.cpp
     savingsaccount.h savingsaccount.cpp
     currentaccount.h currentaccount.cpp
+    ui/registerwindow.h ui/registerwindow.cpp ui/registerwindow.ui
 )
 
 target_link_libraries(BankingSystem1

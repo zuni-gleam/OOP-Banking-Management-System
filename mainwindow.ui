@@ -3,53 +3,119 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
-   <rect><x>0</x><y>0</y><width>500</width><height>400</height></rect>
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>550</height>
+   </rect>
   </property>
   <property name="windowTitle">
-   <string>banking system</string>
+   <string>Apex Trust Banking</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #111111; color: white; font-family: 'Segoe UI';</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="titlelabel">
-    <property name="geometry">
-     <rect><x>50</x><y>70</y><width>400</width><height>60</height></rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>50</number>
     </property>
-    <property name="text"><string>banking system</string></property>
-    <property name="alignment"><set>Qt::AlignCenter</set></property>
-    <property name="styleSheet">
-     <string>font-size: 32px; font-weight: bold; color: #2c3e50;</string>
+    <property name="topMargin">
+     <number>50</number>
     </property>
-   </widget>
-   <widget class="QLabel" name="subtitlelabel">
-    <property name="geometry">
-     <rect><x>50</x><y>140</y><width>400</width><height>30</height></rect>
+    <property name="rightMargin">
+     <number>50</number>
     </property>
-    <property name="text"><string>secure. simple. reliable.</string></property>
-    <property name="alignment"><set>Qt::AlignCenter</set></property>
-    <property name="styleSheet">
-     <string>font-size: 14px; color: #7f8c8d;</string>
+    <property name="bottomMargin">
+     <number>50</number>
     </property>
-   </widget>
-   <widget class="QPushButton" name="startbutton">
-    <property name="geometry">
-     <rect><x>150</x><y>230</y><width>200</width><height>50</height></rect>
+    <property name="spacing">
+     <number>20</number>
     </property>
-    <property name="text"><string>get started</string></property>
-    <property name="styleSheet">
-     <string>background-color: #2980b9; color: white; font-size: 16px; font-weight: bold; border-radius: 8px;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="footerlabel">
-    <property name="geometry">
-     <rect><x>50</x><y>330</y><width>400</width><height>25</height></rect>
-    </property>
-    <property name="text"><string>oop course project</string></property>
-    <property name="alignment"><set>Qt::AlignCenter</set></property>
-    <property name="styleSheet">
-     <string>font-size: 11px; color: #bdc3c7;</string>
-    </property>
-   </widget>
+    <item>
+     <widget class="QLabel" name="titlelabel">
+      <property name="styleSheet">
+       <string notr="true">font-size: 32px; font-weight: bold; color: white; letter-spacing: 2px;</string>
+      </property>
+      <property name="text">
+       <string>APEX TRUST BANKING</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="sublabel">
+      <property name="styleSheet">
+       <string notr="true">font-size: 14px; color: #888888; margin-bottom: 20px;</string>
+      </property>
+      <property name="text">
+       <string>Welcome to the secure institutional portal. Please select your gateway access.</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="cardslayout">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="custbtn">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>180</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; border-radius: 8px; font-size: 18px; font-weight: bold; color: white; padding: 20px;</string>
+        </property>
+        <property name="text">
+         <string>Customer Access</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="adminbtn">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>180</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; border-radius: 8px; font-size: 18px; font-weight: bold; color: white; padding: 20px;</string>
+        </property>
+        <property name="text">
+         <string>Admin Access</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="regbtn">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>180</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #FF6B00; border-radius: 8px; font-size: 18px; font-weight: bold; color: black; padding: 20px;</string>
+        </property>
+        <property name="text">
+         <string>Create Account</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
