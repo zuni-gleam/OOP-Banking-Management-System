@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     regwin = nullptr;
+    loginwin = nullptr;
 
     connect(ui->custbtn, &QPushButton::clicked, this, &MainWindow::handlecustomerclick);
     connect(ui->adminbtn, &QPushButton::clicked, this, &MainWindow::handleadminclick);
@@ -24,16 +25,24 @@ MainWindow::~MainWindow()
     {
         delete regwin;
     }
+    if (loginwin)
+    {
+        delete loginwin;
+    }
 }
 
 void MainWindow::handlecustomerclick()
 {
-    QMessageBox::information(this, "Customer Access");
+    if (!loginwin)
+    {
+        loginwin = new loginwindow();
+    }
+    loginwin->show();
 }
 
 void MainWindow::handleadminclick()
 {
-    QMessageBox::information(this, "Admin Access");
+    QMessageBox::information(this, "Admin Access", "Admin login screen coming soon!");
 }
 
 void MainWindow::handleregisterclick()

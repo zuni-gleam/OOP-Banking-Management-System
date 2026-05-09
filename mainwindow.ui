@@ -18,6 +18,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>20</number>
+    </property>
     <property name="leftMargin">
      <number>50</number>
     </property>
@@ -30,32 +33,30 @@
     <property name="bottomMargin">
      <number>50</number>
     </property>
-    <property name="spacing">
-     <number>20</number>
-    </property>
     <item>
      <widget class="QLabel" name="titlelabel">
       <property name="styleSheet">
-       <string notr="true">font-size: 32px; font-weight: bold; color: white; letter-spacing: 2px;</string>
+       <string notr="true">font-size: 32px; font-weight: bold; color: white; letter-spacing: 2px;
+color: rgb(255, 85 ,0);</string>
       </property>
       <property name="text">
-       <string>APEX TRUST BANKING</string>
+       <string>BAAZ LIMITED</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="sublabel">
       <property name="styleSheet">
-       <string notr="true">font-size: 14px; color: #888888; margin-bottom: 20px;</string>
+       <string notr="true">font-size: 14px; color: #FFFFFF; margin-bottom: 20px;</string>
       </property>
       <property name="text">
-       <string>Welcome to the secure institutional portal. Please select your gateway access.</string>
+       <string>Banking So Smooth Even Your Budget Smiles :)</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
     </item>
