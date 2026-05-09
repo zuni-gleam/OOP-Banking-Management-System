@@ -12,6 +12,10 @@ qt_add_executable(BankingSystem1
     mainwindow.h
     mainwindow.ui
     db/dbmanager.h db/dbmanager.cpp
+    user.h user.cpp
+    account.h account.cpp
+    savingsaccount.h savingsaccount.cpp
+    currentaccount.h currentaccount.cpp
 )
 
 target_link_libraries(BankingSystem1
