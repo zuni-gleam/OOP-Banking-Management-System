@@ -11,7 +11,7 @@ qt_add_executable(BankingSystem1
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    currency.cpp
+    db/dbmanager.h db/dbmanager.cpp
 )
 
 target_link_libraries(BankingSystem1
