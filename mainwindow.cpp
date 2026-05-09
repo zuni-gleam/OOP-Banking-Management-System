@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ui/loginwindow.h"
+#include <QMessageBox>
+#include <iostream>
 
 using namespace std;
 
@@ -9,16 +10,37 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    regwin = nullptr;
+
+    connect(ui->custbtn, &QPushButton::clicked, this, &MainWindow::handlecustomerclick);
+    connect(ui->adminbtn, &QPushButton::clicked, this, &MainWindow::handleadminclick);
+    connect(ui->regbtn, &QPushButton::clicked, this, &MainWindow::handleregisterclick);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (regwin)
+    {
+        delete regwin;
+    }
 }
 
-void MainWindow::on_startbutton_clicked()
+void MainWindow::handlecustomerclick()
 {
-    loginwindow *login = new loginwindow();
-    login->show();
-    this->close();
+    QMessageBox::information(this, "Customer Access");
+}
+
+void MainWindow::handleadminclick()
+{
+    QMessageBox::information(this, "Admin Access");
+}
+
+void MainWindow::handleregisterclick()
+{
+    if (!regwin)
+    {
+        regwin = new registerwindow();
+    }
+    regwin->show();
 }
