@@ -1,8 +1,0 @@
-build/
-.qt/
-CMakeCache.txt
-CMakeFiles/
-*.pro.user
-*.autosave
-*.o
-*.exe
