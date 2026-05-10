@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(BankingSystem1 LANGUAGES CXX)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Sql)
 
 qt_standard_project_setup()
 
@@ -12,17 +12,21 @@ qt_add_executable(BankingSystem1
     mainwindow.h
     mainwindow.ui
     db/dbmanager.h db/dbmanager.cpp
-    user.h user.cpp
-    account.h account.cpp
-    savingsaccount.h savingsaccount.cpp
-    currentaccount.h currentaccount.cpp
+    models/user.h models/user.cpp
+    models/account.h models/account.cpp
+    models/savingsaccount.h models/savingsaccount.cpp
+    models/currentaccount.h models/currentaccount.cpp
     ui/registerwindow.h ui/registerwindow.cpp ui/registerwindow.ui
+    ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
+    security/hasher.h security/hasher.cpp
+    security/totp.h security/totp.cpp
 )
 
 target_link_libraries(BankingSystem1
     PRIVATE
-        Qt::Core
-        Qt::Widgets
+        Qt6::Core
+        Qt6::Widgets
+        Qt6::Sql
 )
 
 install(TARGETS BankingSystem1
