@@ -1,8 +1,6 @@
 #include "hasher.h"
 #include <QCryptographicHash>
-#include <iostream>
 
-using namespace std;
 
 hasher::hasher()
 {

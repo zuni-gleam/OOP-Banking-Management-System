@@ -19,6 +19,9 @@ private slots:
     void handleadminlogin();
     void handlereturn();
 
+signals:
+    void loginconfirmed();
+
 private:
     Ui::adminloginwindow *ui;
 };

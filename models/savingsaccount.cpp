@@ -1,7 +1,4 @@
-#include "savingsaccount.h"
-#include <iostream>
-
-using namespace std;
+﻿#include "savingsaccount.h"
 
 savingsaccount::savingsaccount() : account()
 {
@@ -9,10 +6,10 @@ savingsaccount::savingsaccount() : account()
 }
 
 savingsaccount::savingsaccount(int id, int userid, const QString& acctype, double balance,
-                               double minbalance, int penalized, double dailyused)
-    : account(id, userid, acctype, balance, minbalance, penalized, dailyused)
-{
-}
+                               double minbalance, int penalized, double dailyused, const QString& dailydate,
+                               const QString& interestmonth, const QString& tier)
+    : account(id, userid, acctype, balance, minbalance, penalized, dailyused, dailydate, interestmonth, tier)
+{}
 
 double savingsaccount::calcinterest()
 {
@@ -21,11 +18,9 @@ double savingsaccount::calcinterest()
 
 bool savingsaccount::applyrules()
 {
-    if (balance < minbalance)
-    {
-        penalized = 1;
-        savepenalty();
-        return false;
-    }
+
+
+
+
     return true;
 }

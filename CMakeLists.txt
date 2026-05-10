@@ -40,10 +40,6 @@ qt_add_executable(BankingSystem1
     ui/totpdialog.h
     ui/totpdialog.cpp
     ui/totpdialog.ui
-    ui/qrcodedialog.h
-    ui/qrcodedialog.cpp
-    qr/qrcodegen.hpp
-    qr/qrcodegen.cpp
     ui/admindashboard.h
     ui/admindashboard.cpp
     ui/admindashboard.ui

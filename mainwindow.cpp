@@ -34,9 +34,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->adminbtn, &QPushButton::clicked, this, &MainWindow::handleadminclick);
     connect(ui->regbtn, &QPushButton::clicked, this, &MainWindow::handleregisterclick);
 
-    connect(loginwin, &loginwindow::loginsuccessful, this, &MainWindow::openuserdashboard);
+    connect(adminwin, &adminloginwindow::loginconfirmed, this, [=]() 
+    {
+        admindash->handlerefresh();
+        stack->setCurrentIndex(4);
+    });
 
-    connect(adminwin, &adminloginwindow::loginconfirmed, this, [=]()
+    QPushButton *adminlogout = admindash->findChild<QPushButton*>("logoutbtn");
+    if (adminlogout) 
+    {
+        connect(adminlogout, &QPushButton::clicked, this, [=]() 
+        {
+            stack->setCurrentIndex(0);
+        });
+    }
+
+    QPushButton *regback = regwin->findChild<QPushButton*>("backbtn");
+    if (regback)
     {
         admindash->handlerefresh();
         stack->setCurrentIndex(4);
