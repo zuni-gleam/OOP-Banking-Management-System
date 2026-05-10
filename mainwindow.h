@@ -24,6 +24,7 @@ private slots:
     void handlecustomerclick();
     void handleadminclick();
     void handleregisterclick();
+    void openuserdashboard(user loggedinuser);
 
 private:
     Ui::MainWindow *ui;
