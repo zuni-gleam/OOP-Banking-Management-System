@@ -1,5 +1,6 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
+#include "totpdialog.h"
 #include "../db/dbmanager.h"
 #include <QMessageBox>
 #include <QtSql/QSqlQuery>
@@ -178,6 +179,13 @@ void dashboard::handletransfer()
     if (!recipientacc)
     {
         QMessageBox::critical(this, "Error", "Recipient account not active.");
+        return;
+    }
+
+    totpdialog securebox(currentuser.getpass(), this);
+    if (securebox.exec() != QDialog::Accepted)
+    {
+        delete recipientacc;
         return;
     }
 
