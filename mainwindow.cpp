@@ -37,29 +37,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(loginwin, &loginwindow::loginsuccessful, this, &MainWindow::openuserdashboard);
 
     connect(adminwin, &adminloginwindow::loginconfirmed, this, [=]()
-            {
-                admindash->handlerefresh();
-                stack->setCurrentIndex(4);
-            });
+    {
+        admindash->handlerefresh();
+        stack->setCurrentIndex(4);
+    });
 
 
     connect(admindash, &admindashboard::loggedout, this, [=]()
-            {
-                stack->setCurrentIndex(0);
-            });
+    {
+        stack->setCurrentIndex(0);
+    });
 
 
     connect(regwin, &registerwindow::registrationdone, this, [=]()
-            {
-                loginwin->clearfields();
-                stack->setCurrentIndex(2);
-            });
+    {
+        loginwin->clearfields();
+        stack->setCurrentIndex(2);
+    });
 
 
     connect(regwin, &registerwindow::backrequested, this, [=]()
-            {
-                stack->setCurrentIndex(0);
-            });
+    {
+        stack->setCurrentIndex(0);
+    });
 
     QPushButton *loginback = loginwin->findChild<QPushButton*>("backbtn");
     if (loginback)
@@ -117,10 +117,10 @@ void MainWindow::openuserdashboard(user loggedinuser)
 
 
     connect(userdash, &dashboard::loggedout, this, [=]()
-            {
-                loginwin->clearfields();
-                stack->setCurrentIndex(0);
-            });
+    {
+        loginwin->clearfields();
+        stack->setCurrentIndex(0);
+    });
 
     stack->addWidget(userdash);
     stack->setCurrentWidget(userdash);
