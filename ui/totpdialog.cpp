@@ -2,9 +2,7 @@
 #include "ui_totpdialog.h"
 #include "../security/totp.h"
 #include <QMessageBox>
-#include <iostream>
 
-using namespace std;
 
 totpdialog::totpdialog(const QString& usersecret, QWidget *parent) :
     QDialog(parent),
@@ -31,7 +29,7 @@ void totpdialog::handleverify()
 
     if (typedpin.length() != 6)
     {
-        QMessageBox::warning(this, "failed", "authentication code must be exactly 6 digits");
+        QMessageBox::warning(this, "Failed", "Authentication code must be exactly 6 digits.");
         return;
     }
 
@@ -41,7 +39,7 @@ void totpdialog::handleverify()
     }
     else
     {
-        QMessageBox::critical(this, "rejected", "invalid security pin detected");
+        QMessageBox::critical(this, "Rejected", "Invalid TOTP code. Check your Google Authenticator app.");
     }
 }
 

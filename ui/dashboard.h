@@ -1,39 +1,222 @@
-#ifndef DASHBOARD_H
-#define DASHBOARD_H
-
-#include <QWidget>
-#include "../models/user.h"
-#include "../models/account.h"
-
-namespace Ui {
-class dashboard;
-}
-
-class dashboard : public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit dashboard(const user& activeuser, QWidget *parent = nullptr);
-    ~dashboard();
-
-private slots:
-    void handledeposit();
-    void handlewithdraw();
-    void handletransfer();
-    void handleupdateprofile();
-    void handleloancalc();
-    void handlecurrencycalc();
-    void handlelogout();
-
-private:
-    Ui::dashboard *ui;
-    user currentuser;
-    account *currentaccount;
-
-    void refreshui();
-    void loadtransactions();
-    void addtransaction(const QString& type, double amount, double balafter, const QString& target = "");
-};
-
-#endif
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>admindashboard</class>
+ <widget class="QWidget" name="admindashboard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BAAZ Limited Admin Center</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #0D0D0D; color: white; font-family: 'Segoe UI';</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>20</number>
+   </property>
+   <property name="leftMargin">
+    <number>25</number>
+   </property>
+   <property name="topMargin">
+    <number>25</number>
+   </property>
+   <property name="rightMargin">
+    <number>25</number>
+   </property>
+   <property name="bottomMargin">
+    <number>25</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="topHeader">
+     <item>
+      <widget class="QLabel" name="titlelabel">
+       <property name="styleSheet">
+        <string notr="true">font-size: 26px; font-weight: bold; color: #FF3333;</string>
+       </property>
+       <property name="text">
+        <string>administrative overview</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="hspacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="refreshbtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #222222; border: 1px solid #FF3333; color: white; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>refresh</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="deletebtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #222222; border: 1px solid #AA0000; color: #FF4444; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>delete selected</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="upgradetbtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #222222; border: 1px solid #FFD700; color: #FFD700; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>⬆ UPGRADE TIER</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="logoutbtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #FF3333; color: black; padding: 8px 15px; font-weight: bold; border-radius: 5px; border: none;</string>
+       </property>
+       <property name="text">
+        <string>logout</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="statsGrid">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <widget class="QFrame" name="frame1">
+       <property name="styleSheet">
+        <string notr="true">background-color: #151515; border-radius: 8px; border: 1px solid #333333; padding: 15px;</string>
+       </property>
+       <layout class="QVBoxLayout" name="v1">
+        <item>
+         <widget class="QLabel" name="l1">
+          <property name="styleSheet">
+           <string notr="true">font-size: 13px; color: #888888; border: none;</string>
+          </property>
+          <property name="text">
+           <string>total customers</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="usercountlabel">
+          <property name="styleSheet">
+           <string notr="true">font-size: 32px; font-weight: bold; color: white; border: none;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame2">
+       <property name="styleSheet">
+        <string notr="true">background-color: #151515; border-radius: 8px; border: 1px solid #333333; padding: 15px;</string>
+       </property>
+       <layout class="QVBoxLayout" name="v2">
+        <item>
+         <widget class="QLabel" name="l2">
+          <property name="styleSheet">
+           <string notr="true">font-size: 13px; color: #888888; border: none;</string>
+          </property>
+          <property name="text">
+           <string>total system capital</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="capitallabel">
+          <property name="styleSheet">
+           <string notr="true">font-size: 32px; font-weight: bold; color: #FF3333; border: none;</string>
+          </property>
+          <property name="text">
+           <string>Rs 0.00</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gridBox">
+     <property name="title">
+      <string>customer account registry</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; margin-top: 10px; padding-top: 15px; color: #FF3333; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; }</string>
+     </property>
+     <layout class="QVBoxLayout" name="gridV">
+      <item>
+       <widget class="QTableWidget" name="maintable">
+        <property name="styleSheet">
+         <string notr="true">QTableWidget { background-color: #111111; gridline-color: #222222; color: white; border: 1px solid #333333; } QHeaderView::section { background-color: #222222; color: #FF3333; font-weight: bold; border: 1px solid #333333; padding: 5px; } QTableWidget::item:selected { background-color: #3A0000; }</string>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <column>
+         <property name="text">
+          <string>User ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Username</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Full Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Tier</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Balance</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Account Type</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Standing</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

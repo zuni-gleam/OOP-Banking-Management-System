@@ -3,9 +3,7 @@
 #include "../models/user.h"
 #include "../security/hasher.h"
 #include <QMessageBox>
-#include <iostream>
 
-using namespace std;
 
 adminloginwindow::adminloginwindow(QWidget *parent) :
     QWidget(parent),
@@ -56,5 +54,11 @@ void adminloginwindow::handleadminlogin()
 
 void adminloginwindow::handlereturn()
 {
+    this->close();
+}
 
+void adminloginwindow::clearfields()
+{
+    ui->unameinput->clear();
+    ui->passinput->clear();
 }

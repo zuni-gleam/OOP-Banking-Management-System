@@ -1,4 +1,4 @@
-#ifndef ADMINDASHBOARD_H
+﻿#ifndef ADMINDASHBOARD_H
 #define ADMINDASHBOARD_H
 
 #include <QWidget>
@@ -16,8 +16,15 @@ public:
     ~admindashboard();
     void handlerefresh();
 
+signals:
+    void loggedout();
+
 private slots:
     void loaddatabase();
+    void handledeleteselected();
+    void handleupgradetier();
+    void handleadmindeposit();
+    void handleadminwithdraw();
     void handlelogout();
 
 private:

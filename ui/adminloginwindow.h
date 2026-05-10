@@ -14,6 +14,7 @@ class adminloginwindow : public QWidget
 public:
     explicit adminloginwindow(QWidget *parent = nullptr);
     ~adminloginwindow();
+    void clearfields();
 
 private slots:
     void handleadminlogin();
