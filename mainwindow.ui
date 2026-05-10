@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Apex Trust Banking</string>
+   <string>BAAZ Limited Banking</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #111111; color: white; font-family: 'Segoe UI';</string>
@@ -40,7 +40,7 @@
 color: rgb(255, 85 ,0);</string>
       </property>
       <property name="text">
-       <string>BAAZ LIMITED</string>
+       <string>BAAZ Limited</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -53,7 +53,7 @@ color: rgb(255, 85 ,0);</string>
        <string notr="true">font-size: 14px; color: #FFFFFF; margin-bottom: 20px;</string>
       </property>
       <property name="text">
-       <string>Banking So Smooth Even Your Budget Smiles :)</string>
+       <string>banking so smooth even your budget smiles :)</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -77,7 +77,7 @@ color: rgb(255, 85 ,0);</string>
          <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; border-radius: 8px; font-size: 18px; font-weight: bold; color: white; padding: 20px;</string>
         </property>
         <property name="text">
-         <string>Customer Access</string>
+         <string>customer access</string>
         </property>
        </widget>
       </item>
@@ -93,7 +93,7 @@ color: rgb(255, 85 ,0);</string>
          <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; border-radius: 8px; font-size: 18px; font-weight: bold; color: white; padding: 20px;</string>
         </property>
         <property name="text">
-         <string>Admin Access</string>
+         <string>admin access</string>
         </property>
        </widget>
       </item>
@@ -109,7 +109,7 @@ color: rgb(255, 85 ,0);</string>
          <string notr="true">background-color: #FF6B00; border-radius: 8px; font-size: 18px; font-weight: bold; color: black; padding: 20px;</string>
         </property>
         <property name="text">
-         <string>Create Account</string>
+         <string>create account</string>
         </property>
        </widget>
       </item>

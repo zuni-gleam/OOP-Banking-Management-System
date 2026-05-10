@@ -1,14 +1,13 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPushButton>
 #include <QMessageBox>
-#include <iostream>
 
-using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , userdash(nullptr)
 {
     ui->setupUi(this);
 
@@ -53,11 +52,28 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *regback = regwin->findChild<QPushButton*>("backbtn");
     if (regback)
     {
-        connect(regback, &QPushButton::clicked, this, [=]()
-                {
-                    stack->setCurrentIndex(0);
-                });
-    }
+        admindash->handlerefresh();
+        stack->setCurrentIndex(4);
+    });
+
+
+    connect(admindash, &admindashboard::loggedout, this, [=]()
+    {
+        stack->setCurrentIndex(0);
+    });
+
+
+    connect(regwin, &registerwindow::registrationdone, this, [=]()
+    {
+        loginwin->clearfields();
+        stack->setCurrentIndex(2);
+    });
+
+
+    connect(regwin, &registerwindow::backrequested, this, [=]()
+    {
+        stack->setCurrentIndex(0);
+    });
 
     QPushButton *loginback = loginwin->findChild<QPushButton*>("backbtn");
     if (loginback)
@@ -85,15 +101,41 @@ MainWindow::~MainWindow()
 
 void MainWindow::handlecustomerclick()
 {
+    loginwin->clearfields();
     stack->setCurrentIndex(2);
 }
 
 void MainWindow::handleadminclick()
 {
+    adminwin->clearfields();
     stack->setCurrentIndex(3);
 }
 
 void MainWindow::handleregisterclick()
 {
+    regwin->clearfields();
     stack->setCurrentIndex(1);
+}
+
+void MainWindow::openuserdashboard(user loggedinuser)
+{
+
+    if (userdash)
+    {
+        stack->removeWidget(userdash);
+        delete userdash;
+        userdash = nullptr;
+    }
+
+    userdash = new dashboard(loggedinuser, this);
+
+
+    connect(userdash, &dashboard::loggedout, this, [=]()
+    {
+        loginwin->clearfields();
+        stack->setCurrentIndex(0);
+    });
+
+    stack->addWidget(userdash);
+    stack->setCurrentWidget(userdash);
 }

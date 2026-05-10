@@ -36,8 +36,13 @@ void dbmanager::createtables() {
          "minbalance REAL DEFAULT 10000.0,"
          "penalized INTEGER DEFAULT 0,"
          "dailyused REAL DEFAULT 0.0,"
+         "dailydate TEXT DEFAULT '',"
+         "interestmonth TEXT DEFAULT '',"
          "FOREIGN KEY(userid) REFERENCES users(id)"
          ")");
+
+    exec("ALTER TABLE accounts ADD COLUMN dailydate TEXT DEFAULT ''");
+    exec("ALTER TABLE accounts ADD COLUMN interestmonth TEXT DEFAULT ''");
 
     exec("CREATE TABLE IF NOT EXISTS transactions ("
          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -52,7 +57,10 @@ void dbmanager::createtables() {
 
 void dbmanager::seedadmin() {
     QSqlQuery chk = run("SELECT id FROM users WHERE username = 'admin'");
-    if (chk.next()) return;
+    if (chk.next())
+    {
+        return;
+    }
     QString hashed = QString(QCryptographicHash::hash("admin", QCryptographicHash::Sha256).toHex());
     QSqlQuery q(db);
     q.prepare("INSERT INTO users (username, password, role, fullname, tier) VALUES (?, ?, 'admin', 'Administrator', 'diamond')");
