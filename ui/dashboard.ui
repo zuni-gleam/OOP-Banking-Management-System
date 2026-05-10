@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Apex Trust - Customer Portal</string>
+   <string>BAAZ Limited - Customer Portal</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #111111; color: white; font-family: 'Segoe UI';</string>
@@ -57,17 +57,32 @@
         <string notr="true">background-color: transparent; border: 1px solid #FF6B00; color: #FF6B00; font-weight: bold; padding: 6px 15px; border-radius: 4px;</string>
        </property>
        <property name="text">
-        <string>LOG OUT</string>
+       <string>log out</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="bodyLayout">
-     <property name="spacing">
-      <number>15</number>
+    <widget class="QScrollArea" name="mainScrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QScrollArea { border: none; background-color: #111111; } QScrollBar:vertical { background: #1A1A1A; width: 8px; border-radius: 4px; } QScrollBar::handle:vertical { background: #FF6B00; border-radius: 4px; min-height: 20px; } QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; } QScrollBar:horizontal { background: #1A1A1A; height: 8px; border-radius: 4px; } QScrollBar::handle:horizontal { background: #FF6B00; border-radius: 4px; } QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0px; }</string>
+     </property>
+     <widget class="QWidget" name="scrollContents">
+      <property name="styleSheet">
+       <string notr="true">background-color: #111111;</string>
+      </property>
+      <layout class="QHBoxLayout" name="bodyLayout">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
      <item>
       <widget class="QGroupBox" name="accountBox">
        <property name="maximumSize">
@@ -77,7 +92,7 @@
         </size>
        </property>
        <property name="title">
-        <string>ACCOUNT INFO &amp; PROFILE</string>
+        <string>account info and profile</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; border-radius: 6px; margin-top: 10px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #FF6B00; }</string>
@@ -109,7 +124,7 @@
         <item>
          <widget class="QLabel" name="balTitle">
           <property name="text">
-           <string>AVAILABLE BALANCE</string>
+           <string>available balance</string>
           </property>
          </widget>
         </item>
@@ -195,7 +210,63 @@
            <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 8px; border-radius: 4px;</string>
           </property>
           <property name="text">
-           <string>UPDATE PROFILE</string>
+           <string>update profile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dailylimitlabel">
+          <property name="styleSheet">
+           <string notr="true">font-size: 11px; color: #AAAAAA; padding: 4px; background-color: #1A1A1A; border-radius: 4px;</string>
+          </property>
+          <property name="text">
+           <string>Daily Limit: Loading...</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="penaltylabel">
+          <property name="styleSheet">
+           <string notr="true">font-size: 11px; color: #FFA500; padding: 4px;</string>
+          </property>
+          <property name="text">
+           <string>Account standing: Good</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="totpkeylabel">
+          <property name="styleSheet">
+           <string notr="true">font-size: 10px; color: #888888; padding: 4px; background-color: #1A1A1A; border-radius: 4px;</string>
+          </property>
+          <property name="text">
+           <string>Transfer OTP Key: Loading...</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteaccbtn">
+          <property name="styleSheet">
+           <string notr="true">background-color: transparent; border: 1px solid #AA0000; color: #AA0000; font-weight: bold; padding: 6px; border-radius: 4px;</string>
+          </property>
+          <property name="text">
+           <string>delete account</string>
           </property>
          </widget>
         </item>
@@ -221,7 +292,7 @@
             </size>
            </property>
            <property name="title">
-            <string>QUICK ACTIONS</string>
+            <string>quick actions</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; border-radius: 6px; margin-top: 10px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #FF6B00; }</string>
@@ -255,7 +326,7 @@
                  <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 6px 15px; border-radius: 4px;</string>
                 </property>
                 <property name="text">
-                 <string>DEPOSIT</string>
+                 <string>deposit</string>
                 </property>
                </widget>
               </item>
@@ -286,7 +357,7 @@
                  <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 6px 15px; border-radius: 4px;</string>
                 </property>
                 <property name="text">
-                 <string>WITHDRAW</string>
+                 <string>withdraw</string>
                 </property>
                </widget>
               </item>
@@ -332,7 +403,7 @@
                <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 8px; border-radius: 4px;</string>
               </property>
               <property name="text">
-               <string>TRIGGER SECURE TRANSFER</string>
+               <string>send transfer</string>
               </property>
              </widget>
             </item>
@@ -342,17 +413,76 @@
          <item>
           <widget class="QGroupBox" name="historyBox">
            <property name="title">
-            <string>TRANSACTION HISTORY</string>
+            <string>transaction history</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; border-radius: 6px; margin-top: 10px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #FF6B00; }</string>
            </property>
            <layout class="QVBoxLayout" name="historyVertical">
             <item>
+             <layout class="QHBoxLayout" name="txnFilterLayout">
+              <item>
+               <widget class="QLineEdit" name="txntypefilterinput">
+                <property name="styleSheet">
+                 <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; padding: 5px; color: white; border-radius: 4px;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Filter by type (deposit/withdrawal/transfer)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="filtertxnbtn">
+                <property name="styleSheet">
+                 <string notr="true">background-color: #1A1A1A; border: 1px solid #FF6B00; color: #FF6B00; padding: 5px 10px; border-radius: 4px;</string>
+                </property>
+                <property name="text">
+                 <string>Filter</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="txnidsearchinput">
+                <property name="styleSheet">
+                 <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; padding: 5px; color: white; border-radius: 4px;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Search by TXN ID</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="searchtxnbtn">
+                <property name="styleSheet">
+                 <string notr="true">background-color: #1A1A1A; border: 1px solid #FF6B00; color: #FF6B00; padding: 5px 10px; border-radius: 4px;</string>
+                </property>
+                <property name="text">
+                 <string>Search</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="cleartxnbtn">
+                <property name="styleSheet">
+                 <string notr="true">background-color: transparent; border: 1px solid #555555; color: #AAAAAA; padding: 5px 10px; border-radius: 4px;</string>
+                </property>
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QTableWidget" name="txntable">
               <property name="styleSheet">
                <string notr="true">QTableWidget { background-color: #161616; gridline-color: #333333; border: 1px solid #333333; border-radius: 4px; color: white; } QHeaderView::section { background-color: #1A1A1A; color: #FF6B00; font-weight: bold; border: 1px solid #333333; padding: 5px; }</string>
               </property>
+              <column>
+               <property name="text">
+                <string>TXN ID</string>
+               </property>
+              </column>
               <column>
                <property name="text">
                 <string>Timestamp</string>
@@ -393,7 +523,7 @@
          <item>
           <widget class="QGroupBox" name="loanBox">
            <property name="title">
-            <string>LOAN EMI CALCULATOR</string>
+            <string>loan and emi calculator</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; border-radius: 6px; margin-top: 10px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #FF6B00; }</string>
@@ -434,6 +564,16 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QLineEdit" name="loanincomeinput">
+                <property name="styleSheet">
+                 <string notr="true">background-color: #1A1A1A; border: 1px solid #333333; padding: 5px; color: white; border-radius: 4px;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Monthly Income (Rs)</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
             <item>
@@ -442,7 +582,7 @@
                <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 6px; border-radius: 4px;</string>
               </property>
               <property name="text">
-               <string>CALCULATE EMI</string>
+               <string>calculate emi</string>
               </property>
              </widget>
             </item>
@@ -465,7 +605,7 @@
          <item>
           <widget class="QGroupBox" name="currencyBox">
            <property name="title">
-            <string>CURRENCY EXCHANGER</string>
+            <string>currency exchanger</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; border-radius: 6px; margin-top: 10px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #FF6B00; }</string>
@@ -506,6 +646,11 @@
                   <string>EUR</string>
                  </property>
                 </item>
+                <item>
+                 <property name="text">
+                  <string>GBP</string>
+                 </property>
+                </item>
                </widget>
               </item>
               <item>
@@ -535,6 +680,11 @@
                   <string>EUR</string>
                  </property>
                 </item>
+                <item>
+                 <property name="text">
+                  <string>GBP</string>
+                 </property>
+                </item>
                </widget>
               </item>
              </layout>
@@ -545,7 +695,7 @@
                <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 6px; border-radius: 4px;</string>
               </property>
               <property name="text">
-               <string>CONVERT</string>
+               <string>convert</string>
               </property>
              </widget>
             </item>
@@ -570,6 +720,8 @@
       </layout>
      </item>
     </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>

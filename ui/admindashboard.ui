@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Executive Command Center</string>
+   <string>BAAZ Limited Admin Center</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #0D0D0D; color: white; font-family: 'Segoe UI';</string>
@@ -40,7 +40,7 @@
         <string notr="true">font-size: 26px; font-weight: bold; color: #FF3333;</string>
        </property>
        <property name="text">
-        <string>ADMINISTRATIVE OVERVIEW</string>
+        <string>administrative overview</string>
        </property>
       </widget>
      </item>
@@ -57,7 +57,27 @@
         <string notr="true">background-color: #222222; border: 1px solid #FF3333; color: white; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
        </property>
        <property name="text">
-        <string>REFRESH FEED</string>
+        <string>refresh</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="deletebtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #222222; border: 1px solid #AA0000; color: #FF4444; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>delete selected</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="upgradetbtn">
+       <property name="styleSheet">
+        <string notr="true">background-color: #222222; border: 1px solid #FFD700; color: #FFD700; padding: 8px 15px; font-weight: bold; border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>⬆ UPGRADE TIER</string>
        </property>
       </widget>
      </item>
@@ -67,7 +87,7 @@
         <string notr="true">background-color: #FF3333; color: black; padding: 8px 15px; font-weight: bold; border-radius: 5px; border: none;</string>
        </property>
        <property name="text">
-        <string>SECURE LOGOUT</string>
+        <string>logout</string>
        </property>
       </widget>
      </item>
@@ -90,7 +110,7 @@
            <string notr="true">font-size: 13px; color: #888888; border: none;</string>
           </property>
           <property name="text">
-           <string>TOTAL NETWORK USERS</string>
+           <string>total customers</string>
           </property>
          </widget>
         </item>
@@ -119,7 +139,7 @@
            <string notr="true">font-size: 13px; color: #888888; border: none;</string>
           </property>
           <property name="text">
-           <string>TOTAL SYSTEM CAPITAL</string>
+           <string>total system capital</string>
           </property>
          </widget>
         </item>
@@ -141,7 +161,7 @@
    <item>
     <widget class="QGroupBox" name="gridBox">
      <property name="title">
-      <string>GLOBAL DATABASE REGISTRY</string>
+      <string>customer account registry</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QGroupBox { font-weight: bold; border: 1px solid #333333; margin-top: 10px; padding-top: 15px; color: #FF3333; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; }</string>
@@ -150,7 +170,10 @@
       <item>
        <widget class="QTableWidget" name="maintable">
         <property name="styleSheet">
-         <string notr="true">QTableWidget { background-color: #111111; gridline-color: #222222; color: white; border: 1px solid #333333; } QHeaderView::section { background-color: #222222; color: #FF3333; font-weight: bold; border: 1px solid #333333; padding: 5px; }</string>
+         <string notr="true">QTableWidget { background-color: #111111; gridline-color: #222222; color: white; border: 1px solid #333333; } QHeaderView::section { background-color: #222222; color: #FF3333; font-weight: bold; border: 1px solid #333333; padding: 5px; } QTableWidget::item:selected { background-color: #3A0000; }</string>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
         <column>
          <property name="text">
@@ -169,7 +192,7 @@
         </column>
         <column>
          <property name="text">
-          <string>Role</string>
+          <string>Tier</string>
          </property>
         </column>
         <column>
@@ -179,7 +202,12 @@
         </column>
         <column>
          <property name="text">
-          <string>Account</string>
+          <string>Account Type</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Standing</string>
          </property>
         </column>
        </widget>

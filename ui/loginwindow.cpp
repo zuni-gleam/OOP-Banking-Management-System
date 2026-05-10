@@ -58,7 +58,7 @@ void loginwindow::handleforgotpassword()
     bool ok;
 
     QString uname = QInputDialog::getText(this, "Forgot Password",
-                                          "Enter your username:", QLineEdit::Normal, "", &ok);
+                        "Enter your username:", QLineEdit::Normal, "", &ok);
     if (!ok || uname.trimmed().isEmpty())
     {
         return;
@@ -76,7 +76,7 @@ void loginwindow::handleforgotpassword()
 
 
     QString answer = QInputDialog::getText(this, "Security Question",
-                                           u.getsq(), QLineEdit::Normal, "", &ok);
+                        u.getsq(), QLineEdit::Normal, "", &ok);
     if (!ok || answer.trimmed().isEmpty())
     {
         return;
@@ -90,7 +90,7 @@ void loginwindow::handleforgotpassword()
 
 
     QString newpass = QInputDialog::getText(this, "Reset Password",
-                                            "Enter your new password (min 6 chars):", QLineEdit::Password, "", &ok);
+                        "Enter your new password (min 6 chars):", QLineEdit::Password, "", &ok);
     if (!ok || newpass.length() < 6)
     {
         QMessageBox::warning(this, "Error", "Password must be at least 6 characters.");

@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>250</height>
+    <height>260</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Security Check</string>
+   <string>security check</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #151515; color: white; border: 2px solid #FF6B00; border-radius: 10px;</string>
@@ -50,8 +50,11 @@
      <property name="styleSheet">
       <string notr="true">color: #aaaaaa; font-size: 12px; border: none;</string>
      </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
      <property name="text">
-      <string>Enter the dynamic 6-digit authorization code from your device to confirm.</string>
+        <string>Open Google Authenticator and enter the 6-digit code for BAAZ Limited.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -88,7 +91,7 @@
         <string notr="true">background-color: transparent; border: 1px solid #555555; color: white; padding: 8px; border-radius: 4px;</string>
        </property>
        <property name="text">
-        <string>Abort</string>
+        <string>cancel</string>
        </property>
       </widget>
      </item>
@@ -98,7 +101,7 @@
         <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 8px; border-radius: 4px; border: none;</string>
        </property>
        <property name="text">
-        <string>AUTHORIZE</string>
+        <string>authorize</string>
        </property>
       </widget>
      </item>

@@ -1,4 +1,4 @@
-#include "admindashboard.h"
+﻿#include "admindashboard.h"
 #include "ui_admindashboard.h"
 #include "../models/account.h"
 #include <QtSql/QSqlQuery>
@@ -300,7 +300,7 @@ void admindashboard::handledeleteselected()
     if (ok && q.numRowsAffected() > 0)
     {
         QMessageBox::information(this, "Deleted",
-                                 QString("Customer account '%1' has been permanently deleted.").arg(username));
+            QString("Customer account '%1' has been permanently deleted.").arg(username));
         loaddatabase();
     }
     else
@@ -343,7 +343,7 @@ void admindashboard::handleupgradetier()
     else
     {
         QMessageBox::information(this, "max tier",
-                                 QString("customer '%1' is already at diamond tier.").arg(username));
+            QString("customer '%1' is already at diamond tier.").arg(username));
         return;
     }
 
@@ -370,7 +370,7 @@ void admindashboard::handleupgradetier()
     if (ok && q.numRowsAffected() > 0)
     {
         QMessageBox::information(this, "upgraded",
-                                 QString("'%1' has been upgraded to %2 tier.").arg(username).arg(newtier));
+            QString("'%1' has been upgraded to %2 tier.").arg(username).arg(newtier));
         loaddatabase();
     }
     else

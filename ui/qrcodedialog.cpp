@@ -122,10 +122,10 @@ QRCodeDialog::QRCodeDialog(const QString& username,
     main->addLayout(btnrow);
 
     connect(copybtn, &QPushButton::clicked, this, [=]()
-            {
-                QApplication::clipboard()->setText(secret);
-                copybtn->setText("Copied");
-            });
+    {
+        QApplication::clipboard()->setText(secret);
+        copybtn->setText("Copied");
+    });
     connect(donebtn, &QPushButton::clicked, this, &QDialog::accept);
 
     adjustSize();
@@ -147,7 +147,7 @@ QString QRCodeDialog::builduri(const QString& username, const QString& secret) c
     QString issuer = QString::fromLatin1(QUrl::toPercentEncoding("BAAZ Limited"));
     QString accountName = QString::fromLatin1(QUrl::toPercentEncoding(safeUser));
     return QString("otpauth://totp/%1:%2?secret=%3&issuer=%1")
-        .arg(issuer).arg(accountName).arg(secret);
+               .arg(issuer).arg(accountName).arg(secret);
 }
 
 QVector<QVector<bool>> QRCodeDialog::generateqr(const QString& text) const

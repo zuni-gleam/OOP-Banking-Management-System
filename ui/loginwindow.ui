@@ -11,7 +11,7 @@
   </rect>
  </property>
  <property name="windowTitle">
-  <string>Customer Login</string>
+   <string>customer login</string>
  </property>
  <property name="styleSheet">
   <string notr="true">background-color: #111111; color: white; font-family: 'Segoe UI';</string>
@@ -38,7 +38,7 @@
      <string notr="true">font-size: 24px; font-weight: bold; color: white;</string>
     </property>
     <property name="text">
-     <string>CUSTOMER LOGIN</string>
+        <string>customer login</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -61,7 +61,7 @@
   <item>
    <widget class="QLabel" name="label_1">
     <property name="text">
-     <string>Username</string>
+          <string>username</string>
     </property>
    </widget>
   </item>
@@ -75,7 +75,7 @@
   <item>
    <widget class="QLabel" name="label_2">
     <property name="text">
-     <string>Password</string>
+          <string>password</string>
     </property>
    </widget>
   </item>
@@ -95,7 +95,7 @@
      <string notr="true">background-color: #FF6B00; color: black; font-weight: bold; padding: 12px; border-radius: 4px; font-size: 14px; margin-top: 10px;</string>
     </property>
     <property name="text">
-     <string>ACCESS PORTAL</string>
+         <string>login</string>
     </property>
    </widget>
   </item>
@@ -105,7 +105,17 @@
      <string notr="true">background-color: transparent; color: white; border: none; font-weight: bold; font-size: 13px;</string>
     </property>
     <property name="text">
-     <string>Return to Gateway</string>
+         <string>back</string>
+    </property>
+   </widget>
+  </item>
+  <item>
+   <widget class="QPushButton" name="forgotpassbtn">
+    <property name="styleSheet">
+     <string notr="true">background-color: transparent; color: #FF6B00; border: none; font-size: 12px;</string>
+    </property>
+    <property name="text">
+     <string>Forgot Password? Recover via Security Question</string>
     </property>
    </widget>
   </item>
