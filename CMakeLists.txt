@@ -43,6 +43,7 @@ qt_add_executable(BankingSystem1
     ui/admindashboard.h
     ui/admindashboard.cpp
     ui/admindashboard.ui
+    ui/qrcodedialog.h ui/qrcodedialog.cpp ui/qrcodedialog.ui
 )
 
 target_link_libraries(BankingSystem1

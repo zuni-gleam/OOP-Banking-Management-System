@@ -14,6 +14,11 @@ class registerwindow : public QWidget
 public:
     explicit registerwindow(QWidget *parent = nullptr);
     ~registerwindow();
+    void clearfields();
+
+signals:
+    void registrationdone();
+    void backrequested();
 
 private slots:
     void handlecreate();
