@@ -53,6 +53,17 @@ void dbmanager::createtables() {
          "targetacc TEXT,"
          "createdat TEXT DEFAULT CURRENT_TIMESTAMP"
          ")");
+
+    exec("CREATE TABLE IF NOT EXISTS deletion_requests ("
+         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+         "userid INTEGER NOT NULL,"
+         "username TEXT NOT NULL,"
+         "fullname TEXT,"
+         "reason TEXT,"
+         "status TEXT DEFAULT 'pending',"
+         "requestedat TEXT DEFAULT CURRENT_TIMESTAMP,"
+         "FOREIGN KEY(userid) REFERENCES users(id)"
+         ")");
 }
 
 void dbmanager::seedadmin() {

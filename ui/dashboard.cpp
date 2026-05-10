@@ -1,4 +1,4 @@
-#include "dashboard.h
+﻿#include "dashboard.h"
 #include "ui_dashboard.h"
 #include "totpdialog.h"
 #include "../db/dbmanager.h"
@@ -7,7 +7,6 @@
 #include <QtSql/QSqlDatabase>
 #include <QInputDialog>
 #include <QRegularExpression>
-#include <memory>
 #include <cmath>
 
 dashboard::dashboard(const user& activeuser, QWidget *parent) :
@@ -77,7 +76,7 @@ void dashboard::refreshui()
 
 
         if (currentaccount->ispenalized())
-            ui->penaltylabel->setText("âš  Account penalized: Rs 500 fee applied (balance below minimum)");
+            ui->penaltylabel->setText("âš  Account penalized: Rs 500 fee applied (balance below minimum)");
         else
             ui->penaltylabel->setText("Account standing: Good");
     }
@@ -85,10 +84,10 @@ void dashboard::refreshui()
 
     QString secret = currentuser.getsecret();
     if (!secret.isEmpty())
-        ui->totpkeylabel->setText("ðŸ”  Google Auth Key: " + secret +
+        ui->totpkeylabel->setText("ðŸ” Google Auth Key: " + secret +
                                   "  (Add to Google Authenticator for transfer verification)");
     else
-        ui->totpkeylabel->setText("ðŸ”  Google Auth Key: Not set (contact support)");
+        ui->totpkeylabel->setText("ðŸ” Google Auth Key: Not set (contact support)");
 
     loadtransactions();
 }
@@ -215,8 +214,8 @@ void dashboard::handledeposit()
             currentaccount->markinterestapplied();
             addtransaction("interest", interest, currentaccount->getbal());
             QMessageBox::information(this, "Success",
-                                     "Deposited Rs " + QString::number(amt, 'f', 2) +
-                                         "\n\nMonthly interest applied: Rs " + QString::number(interest, 'f', 2));
+                "Deposited Rs " + QString::number(amt, 'f', 2) +
+                "\n\nMonthly interest applied: Rs " + QString::number(interest, 'f', 2));
         }
         else
         {
@@ -246,8 +245,8 @@ void dashboard::handlewithdraw()
     if (amt > remaining)
     {
         QMessageBox::warning(this, "Daily Limit Exceeded",
-                             QString("Your %1 tier daily limit does not allow this withdrawal.\n"
-                                     "Remaining today: Rs %2").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
+            QString("Your %1 tier daily limit does not allow this withdrawal.\n"
+                    "Remaining today: Rs %2").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
         return;
     }
 
@@ -292,16 +291,16 @@ void dashboard::handletransfer()
     if (amt > remaining)
     {
         QMessageBox::warning(this, "Daily Limit Exceeded",
-                             QString("Your %1 tier daily limit does not allow this transfer.\n"
-                                     "Remaining today: Rs %2\n"
-                                     "Upgrade your tier to increase limits.").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
+            QString("Your %1 tier daily limit does not allow this transfer.\n"
+                    "Remaining today: Rs %2\n"
+                    "Upgrade your tier to increase limits.").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
         return;
     }
 
     user recipient = user::loadfromdb(targetuname);
-    std::unique_ptr<account> recipientacc(account::loadfromdb(recipient.getid(), "savings"));
+    account* recipientacc = account::loadfromdb(recipient.getid(), "savings");
     if (!recipientacc)
-        recipientacc.reset(account::loadfromdb(recipient.getid(), "current"));
+        recipientacc = account::loadfromdb(recipient.getid(), "current");
 
     if (!recipientacc)
     {
@@ -356,6 +355,7 @@ void dashboard::handletransfer()
         QMessageBox::information(this, "Success", "Transferred Rs " + QString::number(amt, 'f', 2) + " successfully!");
         ui->xfertargetinput->clear();
         ui->xferamtinput->clear();
+        delete recipientacc;
         refreshui();
     }
     else
@@ -367,6 +367,7 @@ void dashboard::handletransfer()
         {
             currentaccount = account::loadfromdb(currentuser.getid(), "current");
         }
+        delete recipientacc;
         QMessageBox::critical(this, "Error", "Transfer failed. Insufficient funds or limit exceeded.");
         refreshui();
     }
@@ -391,7 +392,7 @@ void dashboard::handleupdateprofile()
         QRegularExpression phoneRe("^[0-9]{7,15}$");
         if (!phoneRe.match(phone).hasMatch())
         {
-            QMessageBox::warning(this, "Error", "Phone number must be 7â€“15 digits (numbers only).");
+            QMessageBox::warning(this, "Invalid Phone Number", "Phone number must contain digits only (7-15 digits, no dashes or spaces).\nExample: 03001234567");
             return;
         }
     }
@@ -450,8 +451,8 @@ void dashboard::handleloancalc()
 
     bool eligible = checkloanleligibility(principle, income);
     QString eligibilitytext = eligible ?
-                                  "âœ“ You are ELIGIBLE for this loan (balance >= 20% of loan amount)" :
-                                  "âœ— You are NOT ELIGIBLE (insufficient balance or income not provided)";
+        "âœ“ You are ELIGIBLE for this loan (balance >= 20% of loan amount)" :
+        "âœ— You are NOT ELIGIBLE (insufficient balance or income not provided)";
 
     double emi = (principle * monthlyrate * pow(1 + monthlyrate, months)) /
                  (pow(1 + monthlyrate, months) - 1);
@@ -554,11 +555,13 @@ void dashboard::handlecurrencycalc()
 
 void dashboard::handledeleteaccount()
 {
+    // Step 1: Inform the user about the new admin-approval flow
     QMessageBox::StandardButton reply = QMessageBox::question(
-        this, "Delete Account",
-        "Are you sure you want to permanently delete your account?\n"
-        "All your data, account history, and balance will be lost.\n"
-        "This action CANNOT be undone.",
+        this, "Request Account Deletion",
+        "You are about to request permanent deletion of your account.\n\n"
+        "This request will be sent to an administrator for review.\n"
+        "Your account will only be deleted after admin approval.\n\n"
+        "Do you want to proceed with this request?",
         QMessageBox::Yes | QMessageBox::No);
 
     if (reply != QMessageBox::Yes)
@@ -566,24 +569,51 @@ void dashboard::handledeleteaccount()
         return;
     }
 
-
+    // Step 2: Ask for an optional reason
     bool ok;
-    QString confirm = QInputDialog::getText(this, "Confirm Deletion",
-                                            "Type your username to confirm permanent deletion:", QLineEdit::Normal, "", &ok);
-    if (!ok || confirm.trimmed() != currentuser.getuname())
+    QString reason = QInputDialog::getText(this, "Deletion Reason",
+        "Please provide a reason for deleting your account (optional):",
+        QLineEdit::Normal, "", &ok);
+    if (!ok)
     {
-        QMessageBox::information(this, "Cancelled", "Account deletion cancelled.");
+        QMessageBox::information(this, "Cancelled", "Account deletion request cancelled.");
         return;
     }
 
-    if (currentuser.deleteaccount())
+    // Step 3: Check if a pending request already exists
+    QSqlQuery checkq;
+    checkq.prepare("SELECT id FROM deletion_requests WHERE userid = ? AND status = 'pending'");
+    checkq.addBindValue(currentuser.getid());
+    checkq.exec();
+    if (checkq.next())
     {
-        QMessageBox::information(this, "Deleted", "Your account has been permanently deleted.");
-        emit loggedout();
+        QMessageBox::information(this, "Request Already Pending",
+            "You already have a pending deletion request awaiting admin approval.\n"
+            "Please wait for the administrator to review it.");
+        return;
+    }
+
+    // Step 4: Insert the deletion request into the database
+    QSqlQuery q;
+    q.prepare("INSERT INTO deletion_requests (userid, username, fullname, reason, status) "
+              "VALUES (?, ?, ?, ?, 'pending')");
+    q.addBindValue(currentuser.getid());
+    q.addBindValue(currentuser.getuname());
+    q.addBindValue(currentuser.getname());
+    q.addBindValue(reason.trimmed().isEmpty() ? "No reason provided" : reason.trimmed());
+
+    if (q.exec())
+    {
+        QMessageBox::information(this, "Request Submitted",
+            "Your account deletion request has been submitted successfully.\n\n"
+            "An administrator will review your request shortly.\n"
+            "You will be notified once a decision has been made.\n\n"
+            "Your account remains active until the request is approved.");
     }
     else
     {
-        QMessageBox::critical(this, "Error", "Failed to delete account.");
+        QMessageBox::critical(this, "Error",
+            "Failed to submit your deletion request. Please try again later.");
     }
 }
 

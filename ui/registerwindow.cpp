@@ -7,6 +7,7 @@
 #include <QCryptographicHash>
 #include <QRandomGenerator>
 #include <QDateTime>
+#include <QRegularExpression>
 
 registerwindow::registerwindow(QWidget *parent) :
     QWidget(parent),
@@ -38,6 +39,7 @@ void registerwindow::handlecreate()
     QString pass  = ui->passinput->text();
     QString name  = ui->nameinput->text().trimmed();
     QString phone = ui->phoneinput->text().trimmed();
+    QString email = ui->emailinput->text().trimmed();
     QString addr  = ui->addrinput->text().trimmed();
 
     QString acctype = "savings";
@@ -71,6 +73,34 @@ void registerwindow::handlecreate()
     {
         QMessageBox::warning(this, "Error", "Password must be at least 6 characters long.");
         return;
+    }
+
+    // Phone: only digits allowed (7-15 digits)
+    if (!phone.isEmpty())
+    {
+        QRegularExpression phoneRe("^[0-9]{7,15}$");
+        if (!phoneRe.match(phone).hasMatch())
+        {
+            QMessageBox::warning(this, "Invalid Phone Number",
+                "Phone number must contain digits only (7–15 digits).\n"
+                "Example: 03001234567");
+            ui->phoneinput->setFocus();
+            return;
+        }
+    }
+
+    // Email: must end with @gmail.com if provided
+    if (!email.isEmpty())
+    {
+        QRegularExpression emailRe("^[a-zA-Z0-9._%+\\-]+@gmail\\.com$");
+        if (!emailRe.match(email).hasMatch())
+        {
+            QMessageBox::warning(this, "Invalid Email Address",
+                "Email must be a valid Gmail address ending with @gmail.com\n"
+                "Example: yourname@gmail.com");
+            ui->emailinput->setFocus();
+            return;
+        }
     }
 
     if (user::exists(uname))
@@ -115,6 +145,7 @@ void registerwindow::clearfields()
     ui->passinput->clear();
     ui->nameinput->clear();
     ui->phoneinput->clear();
+    ui->emailinput->clear();
     ui->addrinput->clear();
     ui->sainput->clear();
     ui->acctypebox->setCurrentIndex(0);

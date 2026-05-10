@@ -1,4 +1,4 @@
-#include "admindashboard.h"
+﻿#include "admindashboard.h"
 #include "ui_admindashboard.h"
 #include "../models/account.h"
 #include <QtSql/QSqlQuery>
@@ -6,7 +6,6 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QPushButton>
-#include <memory>
 
 
 admindashboard::admindashboard(QWidget *parent) :
@@ -22,14 +21,21 @@ admindashboard::admindashboard(QWidget *parent) :
     ui->topHeader->insertWidget(3, depositbtn);
     ui->topHeader->insertWidget(4, withdrawbtn);
 
-    connect(ui->refreshbtn,  &QPushButton::clicked, this, &admindashboard::handlerefresh);
-    connect(ui->deletebtn,   &QPushButton::clicked, this, &admindashboard::handledeleteselected);
-    connect(ui->upgradetbtn, &QPushButton::clicked, this, &admindashboard::handleupgradetier);
-    connect(depositbtn,      &QPushButton::clicked, this, &admindashboard::handleadmindeposit);
-    connect(withdrawbtn,     &QPushButton::clicked, this, &admindashboard::handleadminwithdraw);
-    connect(ui->logoutbtn,   &QPushButton::clicked, this, &admindashboard::handlelogout);
+    // Core buttons (always present in original UI)
+    connect(ui->refreshbtn,    &QPushButton::clicked, this, &admindashboard::handlerefresh);
+    connect(ui->deletebtn,     &QPushButton::clicked, this, &admindashboard::handledeleteselected);
+    connect(ui->upgradetbtn,   &QPushButton::clicked, this, &admindashboard::handleupgradetier);
+    connect(depositbtn,        &QPushButton::clicked, this, &admindashboard::handleadmindeposit);
+    connect(withdrawbtn,       &QPushButton::clicked, this, &admindashboard::handleadminwithdraw);
+    connect(ui->logoutbtn,     &QPushButton::clicked, this, &admindashboard::handlelogout);
+
+    // Deletion request buttons
+    connect(ui->approveDelBtn, &QPushButton::clicked, this, &admindashboard::handleapprovedeletion);
+    connect(ui->denyDelBtn,    &QPushButton::clicked, this, &admindashboard::handledenydeletion);
+    connect(ui->refreshDelBtn, &QPushButton::clicked, this, &admindashboard::loaddelrequests);
 
     loaddatabase();
+    loaddelrequests();
 }
 
 admindashboard::~admindashboard()
@@ -119,7 +125,7 @@ void admindashboard::handleadmindeposit()
 
     int userid = iditem->data(Qt::UserRole).toInt();
     QString acctype = typeitem->text().toLower();
-    std::unique_ptr<account> selected(account::loadfromdb(userid, acctype));
+    account* selected = account::loadfromdb(userid, acctype);
     if (!selected)
     {
         QMessageBox::critical(this, "error", "could not load selected account.");
@@ -172,6 +178,7 @@ void admindashboard::handleadmindeposit()
         db.rollback();
         QMessageBox::critical(this, "error", "deposit failed.");
     }
+    delete selected;
 }
 
 void admindashboard::handleadminwithdraw()
@@ -203,7 +210,7 @@ void admindashboard::handleadminwithdraw()
 
     int userid = iditem->data(Qt::UserRole).toInt();
     QString acctype = typeitem->text().toLower();
-    std::unique_ptr<account> selected(account::loadfromdb(userid, acctype));
+    account* selected = account::loadfromdb(userid, acctype);
     if (!selected)
     {
         QMessageBox::critical(this, "error", "could not load selected account.");
@@ -238,6 +245,7 @@ void admindashboard::handleadminwithdraw()
         db.rollback();
         QMessageBox::critical(this, "error", "withdrawal failed. check balance, overdraft, or daily limit.");
     }
+    delete selected;
 }
 
 
@@ -300,7 +308,7 @@ void admindashboard::handledeleteselected()
     if (ok && q.numRowsAffected() > 0)
     {
         QMessageBox::information(this, "Deleted",
-                                 QString("Customer account '%1' has been permanently deleted.").arg(username));
+            QString("Customer account '%1' has been permanently deleted.").arg(username));
         loaddatabase();
     }
     else
@@ -343,7 +351,7 @@ void admindashboard::handleupgradetier()
     else
     {
         QMessageBox::information(this, "max tier",
-                                 QString("customer '%1' is already at diamond tier.").arg(username));
+            QString("customer '%1' is already at diamond tier.").arg(username));
         return;
     }
 
@@ -370,7 +378,7 @@ void admindashboard::handleupgradetier()
     if (ok && q.numRowsAffected() > 0)
     {
         QMessageBox::information(this, "upgraded",
-                                 QString("'%1' has been upgraded to %2 tier.").arg(username).arg(newtier));
+            QString("'%1' has been upgraded to %2 tier.").arg(username).arg(newtier));
         loaddatabase();
     }
     else
@@ -382,8 +390,155 @@ void admindashboard::handleupgradetier()
 void admindashboard::handlerefresh()
 {
     loaddatabase();
+    loaddelrequests();
 }
 
+void admindashboard::loaddelrequests()
+{
+    ui->delRequestsTable->setRowCount(0);
+
+    QSqlQuery q;
+    q.exec("SELECT id, userid, username, fullname, reason, status, requestedat "
+           "FROM deletion_requests WHERE status = 'pending' ORDER BY requestedat ASC");
+
+    int row = 0;
+    while (q.next())
+    {
+        ui->delRequestsTable->insertRow(row);
+
+        QTableWidgetItem* reqIdItem = new QTableWidgetItem(q.value(0).toString());
+        reqIdItem->setData(Qt::UserRole,     q.value(0).toInt());  // request id
+        reqIdItem->setData(Qt::UserRole + 1, q.value(1).toInt());  // user id
+        ui->delRequestsTable->setItem(row, 0, reqIdItem);
+        ui->delRequestsTable->setItem(row, 1, new QTableWidgetItem(q.value(2).toString())); // username
+        ui->delRequestsTable->setItem(row, 2, new QTableWidgetItem(q.value(3).toString())); // fullname
+        ui->delRequestsTable->setItem(row, 3, new QTableWidgetItem(q.value(4).toString())); // reason
+        ui->delRequestsTable->setItem(row, 4, new QTableWidgetItem(q.value(5).toString())); // status
+        ui->delRequestsTable->setItem(row, 5, new QTableWidgetItem(q.value(6).toString())); // requestedat
+        row++;
+    }
+
+    ui->pendingCountLabel->setText(QString("Pending Deletion Requests: %1").arg(row));
+}
+
+void admindashboard::handleapprovedeletion()
+{
+    int selectedrow = ui->delRequestsTable->currentRow();
+    if (selectedrow < 0)
+    {
+        QMessageBox::warning(this, "no selection", "please select a deletion request to approve.");
+        return;
+    }
+
+    QTableWidgetItem* item     = ui->delRequestsTable->item(selectedrow, 0);
+    QTableWidgetItem* nameitem = ui->delRequestsTable->item(selectedrow, 1);
+    if (!item || !nameitem) return;
+
+    int requestid = item->data(Qt::UserRole).toInt();
+    int userid    = item->data(Qt::UserRole + 1).toInt();
+    QString username = nameitem->text();
+
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, "Approve Deletion",
+        QString("Approve and permanently delete account of user: %1?\n\n"
+                "This will remove all their data, accounts, and transaction history.\n"
+                "This action CANNOT be undone.").arg(username),
+        QMessageBox::Yes | QMessageBox::No);
+
+    if (reply != QMessageBox::Yes) return;
+
+    QSqlDatabase db = QSqlDatabase::database();
+    if (!db.transaction())
+    {
+        QMessageBox::critical(this, "error", "could not start deletion transaction.");
+        return;
+    }
+
+    QSqlQuery q;
+    bool ok = true;
+
+    // Delete transactions
+    q.prepare("DELETE FROM transactions WHERE accid IN (SELECT id FROM accounts WHERE userid = ?)");
+    q.addBindValue(userid);
+    ok = q.exec();
+
+    // Delete accounts
+    if (ok)
+    {
+        q.prepare("DELETE FROM accounts WHERE userid = ?");
+        q.addBindValue(userid);
+        ok = q.exec();
+    }
+
+    // Delete any other deletion_requests for this user
+    if (ok)
+    {
+        q.prepare("DELETE FROM deletion_requests WHERE userid = ?");
+        q.addBindValue(userid);
+        ok = q.exec();
+    }
+
+    // Delete the user
+    if (ok)
+    {
+        q.prepare("DELETE FROM users WHERE id = ? AND role = 'customer'");
+        q.addBindValue(userid);
+        ok = q.exec() && q.numRowsAffected() > 0;
+    }
+
+    if (ok && db.commit())
+    {
+        QMessageBox::information(this, "Account Deleted",
+            QString("Account of '%1' has been permanently deleted and the user has been notified.").arg(username));
+        loaddatabase();
+        loaddelrequests();
+    }
+    else
+    {
+        db.rollback();
+        QMessageBox::critical(this, "error", "Failed to delete account. All changes rolled back.");
+    }
+}
+
+void admindashboard::handledenydeletion()
+{
+    int selectedrow = ui->delRequestsTable->currentRow();
+    if (selectedrow < 0)
+    {
+        QMessageBox::warning(this, "no selection", "please select a deletion request to deny.");
+        return;
+    }
+
+    QTableWidgetItem* item     = ui->delRequestsTable->item(selectedrow, 0);
+    QTableWidgetItem* nameitem = ui->delRequestsTable->item(selectedrow, 1);
+    if (!item || !nameitem) return;
+
+    int requestid    = item->data(Qt::UserRole).toInt();
+    QString username = nameitem->text();
+
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, "Deny Deletion Request",
+        QString("Deny the deletion request from user: %1?\n\n"
+                "Their account will remain active.").arg(username),
+        QMessageBox::Yes | QMessageBox::No);
+
+    if (reply != QMessageBox::Yes) return;
+
+    QSqlQuery q;
+    q.prepare("UPDATE deletion_requests SET status = 'denied' WHERE id = ?");
+    q.addBindValue(requestid);
+
+    if (q.exec() && q.numRowsAffected() > 0)
+    {
+        QMessageBox::information(this, "Request Denied",
+            QString("Deletion request for '%1' has been denied. Their account remains active.").arg(username));
+        loaddelrequests();
+    }
+    else
+    {
+        QMessageBox::critical(this, "error", "Failed to update the request status.");
+    }
+}
 
 void admindashboard::handlelogout()
 {

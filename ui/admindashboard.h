@@ -26,6 +26,9 @@ private slots:
     void handleadmindeposit();
     void handleadminwithdraw();
     void handlelogout();
+    void loaddelrequests();
+    void handleapprovedeletion();
+    void handledenydeletion();
 
 private:
     Ui::admindashboard *ui;

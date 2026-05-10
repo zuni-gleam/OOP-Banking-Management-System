@@ -24,4 +24,4 @@ private:
     QString activepass;
 };
 
-#endi
+#endif
