@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Bank Administration Access</string>
+   <string>bank administration access</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #0D0D0D; color: white; font-family: 'Segoe UI';</string>
@@ -38,7 +38,7 @@
       <string notr="true">color: #FF3B3B; font-size: 22px; font-weight: bold;</string>
      </property>
      <property name="text">
-      <string>SECURE ADMINISTRATION</string>
+        <string>secure administration</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -61,7 +61,7 @@
    <item>
     <widget class="QLabel" name="label_1">
      <property name="text">
-      <string>Admin Username</string>
+          <string>admin username</string>
      </property>
     </widget>
    </item>
@@ -75,7 +75,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Administrative Password</string>
+          <string>admin password</string>
      </property>
     </widget>
    </item>
@@ -95,7 +95,7 @@
       <string notr="true">background-color: #FF3B3B; color: white; font-weight: bold; padding: 12px; border-radius: 4px; font-size: 13px; margin-top: 15px;</string>
      </property>
      <property name="text">
-      <string>VALIDATE ACCESS</string>
+         <string>login</string>
      </property>
     </widget>
    </item>
@@ -105,7 +105,7 @@
       <string notr="true">background-color: transparent; color: #888888; border: none; font-weight: bold; margin-top: 5px;</string>
      </property>
      <property name="text">
-      <string>Return to Station</string>
+         <string>back</string>
      </property>
     </widget>
    </item>

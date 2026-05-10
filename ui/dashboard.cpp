@@ -1,4 +1,4 @@
-#include "dashboard.h
+﻿#include "dashboard.h"
 #include "ui_dashboard.h"
 #include "totpdialog.h"
 #include "../db/dbmanager.h"
@@ -77,7 +77,7 @@ void dashboard::refreshui()
 
 
         if (currentaccount->ispenalized())
-            ui->penaltylabel->setText("âš  Account penalized: Rs 500 fee applied (balance below minimum)");
+            ui->penaltylabel->setText("âš  Account penalized: Rs 500 fee applied (balance below minimum)");
         else
             ui->penaltylabel->setText("Account standing: Good");
     }
@@ -85,10 +85,10 @@ void dashboard::refreshui()
 
     QString secret = currentuser.getsecret();
     if (!secret.isEmpty())
-        ui->totpkeylabel->setText("ðŸ”  Google Auth Key: " + secret +
+        ui->totpkeylabel->setText("ðŸ” Google Auth Key: " + secret +
                                   "  (Add to Google Authenticator for transfer verification)");
     else
-        ui->totpkeylabel->setText("ðŸ”  Google Auth Key: Not set (contact support)");
+        ui->totpkeylabel->setText("ðŸ” Google Auth Key: Not set (contact support)");
 
     loadtransactions();
 }
@@ -215,8 +215,8 @@ void dashboard::handledeposit()
             currentaccount->markinterestapplied();
             addtransaction("interest", interest, currentaccount->getbal());
             QMessageBox::information(this, "Success",
-                                     "Deposited Rs " + QString::number(amt, 'f', 2) +
-                                         "\n\nMonthly interest applied: Rs " + QString::number(interest, 'f', 2));
+                "Deposited Rs " + QString::number(amt, 'f', 2) +
+                "\n\nMonthly interest applied: Rs " + QString::number(interest, 'f', 2));
         }
         else
         {
@@ -246,8 +246,8 @@ void dashboard::handlewithdraw()
     if (amt > remaining)
     {
         QMessageBox::warning(this, "Daily Limit Exceeded",
-                             QString("Your %1 tier daily limit does not allow this withdrawal.\n"
-                                     "Remaining today: Rs %2").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
+            QString("Your %1 tier daily limit does not allow this withdrawal.\n"
+                    "Remaining today: Rs %2").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
         return;
     }
 
@@ -292,9 +292,9 @@ void dashboard::handletransfer()
     if (amt > remaining)
     {
         QMessageBox::warning(this, "Daily Limit Exceeded",
-                             QString("Your %1 tier daily limit does not allow this transfer.\n"
-                                     "Remaining today: Rs %2\n"
-                                     "Upgrade your tier to increase limits.").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
+            QString("Your %1 tier daily limit does not allow this transfer.\n"
+                    "Remaining today: Rs %2\n"
+                    "Upgrade your tier to increase limits.").arg(currentuser.gettier().toUpper()).arg(remaining, 0, 'f', 0));
         return;
     }
 
@@ -450,8 +450,8 @@ void dashboard::handleloancalc()
 
     bool eligible = checkloanleligibility(principle, income);
     QString eligibilitytext = eligible ?
-                                  "âœ“ You are ELIGIBLE for this loan (balance >= 20% of loan amount)" :
-                                  "âœ— You are NOT ELIGIBLE (insufficient balance or income not provided)";
+        "âœ“ You are ELIGIBLE for this loan (balance >= 20% of loan amount)" :
+        "âœ— You are NOT ELIGIBLE (insufficient balance or income not provided)";
 
     double emi = (principle * monthlyrate * pow(1 + monthlyrate, months)) /
                  (pow(1 + monthlyrate, months) - 1);
@@ -569,7 +569,7 @@ void dashboard::handledeleteaccount()
 
     bool ok;
     QString confirm = QInputDialog::getText(this, "Confirm Deletion",
-                                            "Type your username to confirm permanent deletion:", QLineEdit::Normal, "", &ok);
+        "Type your username to confirm permanent deletion:", QLineEdit::Normal, "", &ok);
     if (!ok || confirm.trimmed() != currentuser.getuname())
     {
         QMessageBox::information(this, "Cancelled", "Account deletion cancelled.");
