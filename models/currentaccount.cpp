@@ -1,7 +1,4 @@
-#include "currentaccount.h"
-#include <iostream>
-
-using namespace std;
+﻿#include "currentaccount.h"
 
 currentaccount::currentaccount() : account()
 {
@@ -9,10 +6,10 @@ currentaccount::currentaccount() : account()
 }
 
 currentaccount::currentaccount(int id, int userid, const QString& acctype, double balance,
-                               double minbalance, int penalized, double dailyused)
-    : account(id, userid, acctype, balance, minbalance, penalized, dailyused)
-{
-}
+                               double minbalance, int penalized, double dailyused, const QString& dailydate,
+                               const QString& interestmonth, const QString& tier)
+    : account(id, userid, acctype, balance, minbalance, penalized, dailyused, dailydate, interestmonth, tier)
+{}
 
 double currentaccount::calcinterest()
 {
@@ -21,10 +18,6 @@ double currentaccount::calcinterest()
 
 bool currentaccount::applyrules()
 {
-    if (balance < minbalance)
-    {
-        penalized = 1;
-        savepenalty();
-    }
-    return balance > -5000.0;
+
+    return balance >= -5000.0;
 }
