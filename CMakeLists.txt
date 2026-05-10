@@ -40,6 +40,9 @@ qt_add_executable(BankingSystem1
     ui/totpdialog.h
     ui/totpdialog.cpp
     ui/totpdialog.ui
+    ui/admindashboard.h
+    ui/admindashboard.cpp
+    ui/admindashboard.ui
 )
 
 target_link_libraries(BankingSystem1

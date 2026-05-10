@@ -6,6 +6,7 @@
 #include "ui/registerwindow.h"
 #include "ui/loginwindow.h"
 #include "ui/adminloginwindow.h"
+#include "ui/admindashboard.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,7 @@ private:
     registerwindow *regwin;
     loginwindow *loginwin;
     adminloginwindow *adminwin;
+    admindashboard *admindash;
 };
 
 #endif
