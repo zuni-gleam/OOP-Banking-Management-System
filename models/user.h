@@ -1,4 +1,4 @@
-#ifndef USER_H
+﻿#ifndef USER_H
 #define USER_H
 
 #include <QString>
@@ -29,12 +29,15 @@ public:
     void setname(const QString& n);
     void setpass(const QString& p);
     void setsecret(const QString& s);
+    void settier(const QString& t);
 
     static user loadfromdb(const QString& uname);
+    static user loadfromid(int uid);
     static bool exists(const QString& uname);
     bool savetodb() const;
     bool updateprofile() const;
     bool updatepass() const;
+    bool deleteaccount() const;
 
 private:
     int id;

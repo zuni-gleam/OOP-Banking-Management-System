@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿#include "dashboard.h"
+=======
+#include "dashboard.h
+>>>>>>> 54252e20c16fabb4df888df91e8fed645e401e9d
 #include "ui_dashboard.h"
 #include "totpdialog.h"
 #include "../db/dbmanager.h"

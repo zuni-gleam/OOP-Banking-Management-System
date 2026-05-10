@@ -8,7 +8,8 @@ class account
 public:
     account();
     account(int id, int userid, const QString& acctype, double balance,
-            double minbalance, int penalized, double dailyused);
+            double minbalance, int penalized, double dailyused, const QString& dailydate,
+            const QString& interestmonth, const QString& tier = "gold");
 
     int getid() const;
     int getuserid() const;
@@ -17,11 +18,16 @@ public:
     double getminbal() const;
     int ispenalized() const;
     double getdailyused() const;
+    double getdailylimit() const;
 
     bool deposit(double amt);
     bool withdraw(double amt);
     void applypenalty();
     void resetdaily();
+    void syncdailyusage();
+    void checkandapplypenalty();
+    bool canapplymonthlyinterest() const;
+    bool markinterestapplied();
 
     virtual double calcinterest() = 0;
     virtual bool applyrules() = 0;
@@ -32,6 +38,7 @@ public:
     bool savebalance() const;
     bool savepenalty() const;
     bool savedailyused() const;
+    bool saveinterestmonth() const;
 
 protected:
     int id;
@@ -41,6 +48,9 @@ protected:
     double minbalance;
     int penalized;
     double dailyused;
+    QString dailydate;
+    QString interestmonth;
+    QString tier;
 };
 
 #endif

@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>350</width>
     <height>260</height>
+=======
+    <width>915</width>
+    <height>429</height>
+>>>>>>> 54252e20c16fabb4df888df91e8fed645e401e9d
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +46,7 @@
       <string>2FA VERIFICATION</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -57,7 +62,7 @@
         <string>Open Google Authenticator and enter the 6-digit code for BAAZ Limited.</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -69,14 +74,14 @@
      <property name="styleSheet">
       <string notr="true">background-color: #0A0A0A; color: #FF6B00; font-size: 24px; font-weight: bold; border: 1px solid #333333; padding: 10px; border-radius: 5px;</string>
      </property>
+     <property name="maxLength">
+      <number>6</number>
+     </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
      <property name="placeholderText">
       <string>******</string>
-     </property>
-     <property name="maxLength">
-      <number>6</number>
      </property>
     </widget>
    </item>
