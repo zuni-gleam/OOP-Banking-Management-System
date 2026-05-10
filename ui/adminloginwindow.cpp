@@ -46,7 +46,7 @@ void adminloginwindow::handleadminlogin()
     if (u.getrole() == "admin" && u.getpass() == hashedinput)
     {
         QMessageBox::information(this, "success", "welcome administrator, level 1 clearance granted");
-
+        emit loginconfirmed();
     }
     else
     {
