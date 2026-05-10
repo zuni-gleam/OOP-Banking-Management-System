@@ -1,4 +1,4 @@
-#include "dashboard.h"
+#include "dashboard.h
 #include "ui_dashboard.h"
 #include "../db/dbmanager.h"
 #include <QMessageBox>

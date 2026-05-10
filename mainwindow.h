@@ -6,6 +6,9 @@
 #include "ui/registerwindow.h"
 #include "ui/loginwindow.h"
 #include "ui/adminloginwindow.h"
+#include "ui/admindashboard.h"
+#include "ui/dashboard.h"
+#include "models/user.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +26,7 @@ private slots:
     void handlecustomerclick();
     void handleadminclick();
     void handleregisterclick();
+    void openuserdashboard(user loggedinuser);
 
 private:
     Ui::MainWindow *ui;
@@ -30,6 +34,8 @@ private:
     registerwindow *regwin;
     loginwindow *loginwin;
     adminloginwindow *adminwin;
+    admindashboard *admindash;
+    dashboard *userdash;
 };
 
 #endif
