@@ -6,3 +6,6 @@ CMakeFiles/
 *.autosave
 *.o
 *.exe
+
+build_release/
+
